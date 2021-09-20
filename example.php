@@ -9,4 +9,4 @@ class Something
         return $this->j++;
     }
 }
-?>
+
