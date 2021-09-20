@@ -16,4 +16,4 @@ jobs:
           tools: phpmd
 
       - name: Run PHPMD
-        run: phpmd . github  codesize,unusedcode,naming 
+        run: phpmd . text  codesize,unusedcode,naming 
