@@ -1,3 +1,4 @@
+<?php
 class Something
 {
     private static $FOO = 2; // Unused
@@ -8,3 +9,4 @@ class Something
         return $this->j++;
     }
 }
+?>
