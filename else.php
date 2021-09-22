@@ -6,6 +6,9 @@ class Foo
     {
         if ($flag) {
             // one branch
+            
+            
+            
         } else {
             // another branch
         }
