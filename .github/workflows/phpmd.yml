@@ -1,19 +1,18 @@
-name: PHPMD
-on: push
+name: PHPMD check
+
+on:
+  pull_request_target:
+    types: [opened]
 
 jobs:
-  phpmd:
-    name: PHPMD
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Setup PHP environment
-        uses: shivammathur/setup-php@v2
-        with:
-          coverage: none
-          tools: phpmd
-
-      - name: Run PHPMD
-        run: phpmd . text  codesize,unusedcode,naming 
+  phpcs:
+      name: PHPMD
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+        - name: PHPMD check
+          uses: pmagentur/pm_php_md@master
+          with:
+            files: '.'
+            renderers: 'xml'
+            only_changed_files: 'true'
