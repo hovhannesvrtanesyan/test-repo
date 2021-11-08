@@ -1,0 +1,41 @@
+name: PHP code check
+
+on:
+  pull_request_target:
+    types: [opened]
+  pull_request:
+    types: [synchronize]
+    
+env:
+  AUTOLOAD_BRANCH: ""
+  AUTOLOAD_FILE_NAME: ""
+  AUTOLOAD_PATH: ""
+  BASELINE_BRANCH: ""
+  BASELINE_PATH: ""
+
+jobs:
+  phpmd:
+      name: PHPMD
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+          with:
+            ref: ${{ github.event.pull_request.head.sha }}
+        - name: PHPMD check
+          uses: pmagentur/pm_php_md@master
+          with:
+            files: '.'
+            renderers: 'xml'
+            only_changed_files: 'true'
+  phpdoctor:
+      name: PHPDoctor
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+          with:
+            ref: ${{ github.event.pull_request.head.sha }}
+        - name: PHPDoctor check
+          uses: pmagentur/pm_php_doctor@master
+          with:
+            only_changed_files: 'true'
+            autoload_file: ${{ env.AUTOLOAD_FILE_NAME }}
